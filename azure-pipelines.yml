@@ -3,6 +3,12 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+resources:
+ repositories:
+   - repository: buildapp
+     type: github
+     endpoint: GitHubconnection
+     name: giri347/buildapp
 
 
 trigger:
@@ -17,6 +23,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: buildapp
 
 
 - task: NuGetToolInstaller@1
