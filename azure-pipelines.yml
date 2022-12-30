@@ -11,7 +11,7 @@ resources:
      name: giri347/buildapp
    - repository: webappdeploy-AzureDevops
      type: github
-     endpoint: giri347
+     endpoint: GitHubconnection
      name: giri347/webappdeploy-AzureDevops
 
 
