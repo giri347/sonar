@@ -16,7 +16,7 @@ resources:
 
 
 trigger:
-- main
+- none
 parameters:
   - name: select
     displayName: select_projectbuildrepo
