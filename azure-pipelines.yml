@@ -33,7 +33,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- checkout: buildapp
+- checkout: webappdeploy-AzureDevops 
 
 
 - task: NuGetToolInstaller@1
