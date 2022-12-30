@@ -20,7 +20,7 @@ trigger:
 parameters:
   - name: select
     displayName: select_projectbuildrepo
-    default: buildapp
+    default: webappdeploy-AzureDevops
     type: string
     values:
       - buildapp
