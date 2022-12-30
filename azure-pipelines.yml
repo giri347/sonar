@@ -17,12 +17,12 @@ resources:
 
 trigger:
 - none
-parameters:
-  - name: select
-    displayName: select_projectbuildrepo
-    values:
-      - buildapp
-      - webappdeploy-AzureDevops
+#parameters:
+  #- name: select
+    #displayName: select_projectbuildrepo
+    #values:
+     # - buildapp
+      #- webappdeploy-AzureDevops
 
 pool:
   vmImage: 'windows-latest'
@@ -33,6 +33,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: buildapp
 
 
 - task: NuGetToolInstaller@1
