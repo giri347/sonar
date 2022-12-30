@@ -9,6 +9,10 @@ resources:
      type: github
      endpoint: GitHubconnection
      name: giri347/buildapp
+   - repository: webappdeploy-AzureDevops
+     type: github
+     endpoint: giri347
+     name: giri347/webappdeploy-AzureDevops
 
 
 trigger:
@@ -24,6 +28,7 @@ variables:
 
 steps:
 - checkout: buildapp
+- checkout: webappdeploy-AzureDevops
 
 
 - task: NuGetToolInstaller@1
