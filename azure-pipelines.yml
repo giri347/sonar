@@ -3,21 +3,6 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-resources:
-
-  repositories:
-
-    - repository: project-1
-
-      type: git
-
-      name: sample-project/project1
-
-    - repository: project-2
-
-      type: git
-
-      name: sample-project/project-2
 
 
 trigger:
@@ -32,9 +17,8 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- checkout: self
-- checkout: project-1
-- checkout: project-2
+
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
