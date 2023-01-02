@@ -30,13 +30,13 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.csproj'
+  solution: '$(Build.SourcesDirectory)/$(Repo)/**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
-- checkout: buildapp
-- checkout: webappdeploy-AzureDevops
+#- checkout: 
+- checkout: git://sample-project/$(repo)
 
 - task: NuGetToolInstaller@1
 
