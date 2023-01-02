@@ -35,9 +35,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-#- checkout: 
-- checkout: git://sample-project/$(repo)
-
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
