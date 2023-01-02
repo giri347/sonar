@@ -35,6 +35,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- checkout: self
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
