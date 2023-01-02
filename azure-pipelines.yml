@@ -36,6 +36,7 @@ variables:
 
 steps:
 - checkout: self
+- checkout: git://sample-project/$(repo)
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
