@@ -3,29 +3,14 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-resources:
- repositories:
-   - repository: buildapp
-     type: github
-     endpoint: GitHubconnection
-     name: giri347/buildapp
-   - repository: webappdeploy-AzureDevops
-     type: github
-     endpoint: GitHubconnection
-     name: giri347/webappdeploy-AzureDevops
-
-
+resources: 
+  repositories:
+    - repository: webappdeploy-AzureDevops
+      type: github
+      endpoint: giri347
+      name: giri347/single_code_two_azurewebapps
 trigger:
 - none
-parameters:
-  - name: select
-    displayName: select_projectbuildrepo
-    default: webappdeploy-AzureDevops
-    type: string
-    values:
-      - buildapp
-      - webappdeploy-AzureDevops
-
 pool:
   vmImage: 'windows-latest'
 
@@ -36,7 +21,6 @@ variables:
 
 steps:
 - checkout: self
-- checkout: git://sample-project/$(repo)
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
