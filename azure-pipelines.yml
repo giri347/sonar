@@ -3,12 +3,6 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-resources: 
-  repositories:
-    - repository: webappdeploy-AzureDevops
-      type: github
-      endpoint: giri347
-      name: giri347/single_code_two_azurewebapps
 trigger:
 - none
 pool:
@@ -25,26 +19,25 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
+    command: 'restore'
     restoreSolution: '$(solution)'
+    feedsToUse: 'select'
 
 
-# - task: VSBuild@1
-#   inputs:
-#     solution: '$(solution)'
-#     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
 - task: VSBuild@1
   inputs:
-    solution: '**\*.csproj'
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'einfo-terraform'
-    appType: 'webAppLinux'
-    WebAppName: 'einfoprowebapp151694'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'sa1_test_eic_DevOpslearning'
-    SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+#     configuration: '$(buildConfiguration)'
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: 'einfo-terraform'
+#     appType: 'webAppLinux'
+#     WebAppName: 'einfoprowebapp151694'
+#     deployToSlotOrASE: true
+#     ResourceGroupName: 'sa1_test_eic_DevOpslearning'
+#     SlotName: 'production'
+#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
