@@ -35,3 +35,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'einfo-terraform'
+    appType: 'webAppLinux'
+    WebAppName: 'einfoprowebapp151694'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'sa1_test_eic_DevOpslearning'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
