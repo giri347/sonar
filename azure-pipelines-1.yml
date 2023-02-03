@@ -23,15 +23,15 @@ steps:
     targetPath: '$(Pipeline.Workspace)'
     artifact: 'webapp'
     publishLocation: 'pipeline'
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '$(projectDirectory)\hadar.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-# - task: AzureRmWebAppDeployment@4
+# - task: DotNetCoreCLI@2
+#   displayName: Publish
 #   inputs:
+#     command: 'publish'
+#     publishWebProjects: false
+#     projects: '$(projectDirectory)\hadar.csproj'
+#     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+# # - task: AzureRmWebAppDeployment@4
+# #   inputs:
 #     ConnectionType: 'AzureRM'
 #     azureSubscription: 'einfo-terraform'
 #     appType: 'webApp'
