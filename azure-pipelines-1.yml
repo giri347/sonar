@@ -51,7 +51,7 @@ steps:
   displayName: 'Use dotnet 6'  
   inputs:  
     packageType: 'sdk'  
-    version: '6.x'  
+    version: '3.x'  
 
 - task: DotNetCoreCLI@2  
   displayName: 'DotNet Restore NuGet packages'  
