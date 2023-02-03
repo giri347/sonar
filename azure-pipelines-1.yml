@@ -81,3 +81,11 @@ steps:
 #     appName: $(appName)  
 #     virtualApplication: '/api'  
 #     package: '$(System.DefaultWorkingDirectory)/**/webapi.zip' 
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'einfo-terraform'
+    appType: 'webApp'
+    appName: 'einfowebappdev151694'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
