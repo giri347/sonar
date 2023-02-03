@@ -10,40 +10,74 @@ pool:
   vmImage: windows-latest
 
 steps:
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-
-- task: UseDotNet@2
-  inputs:
-    version: '3.1.x'
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'webapp'
-    publishLocation: 'pipeline'
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '$(projectDirectory)\hadar.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-# - task: AzureRmWebAppDeployment@4
+# - task: DotNetCoreCLI@2
 #   inputs:
-#     ConnectionType: 'AzureRM'
+#     command: 'build'
+#     projects: '**/*.csproj'
+
+# - task: UseDotNet@2
+#   inputs:
+#     version: '3.1.x'
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: '$(Pipeline.Workspace)'
+#     artifact: 'webapp'
+#     publishLocation: 'pipeline'
+# - task: DotNetCoreCLI@2
+#   displayName: Publish
+#   inputs:
+#     command: 'publish'
+#     publishWebProjects: false
+#     projects: '$(projectDirectory)\hadar.csproj'
+#     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+# # - task: AzureRmWebAppDeployment@4
+# #   inputs:
+# #     ConnectionType: 'AzureRM'
+# #     azureSubscription: 'einfo-terraform'
+# #     appType: 'webApp'
+# #     WebAppName: 'einfowebappdev151694'
+# #     deployToSlotOrASE: true
+# #     ResourceGroupName: 'sa1_test_eic_DevOpslearning'
+# #     SlotName: 'production'
+# #     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+# - task: AzureWebApp@1
+#   inputs:
 #     azureSubscription: 'einfo-terraform'
 #     appType: 'webApp'
-#     WebAppName: 'einfowebappdev151694'
-#     deployToSlotOrASE: true
-#     ResourceGroupName: 'sa1_test_eic_DevOpslearning'
-#     SlotName: 'production'
-#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'einfo-terraform'
-    appType: 'webApp'
-    appName: 'einfowebappdev151694'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+#     appName: 'einfowebappdev151694'
+#     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#     deploymentMethod: 'auto'
+- task: UseDotNet@2  
+  displayName: 'Use dotnet 6'  
+  inputs:  
+    packageType: 'sdk'  
+    version: '6.x'  
+
+- task: DotNetCoreCLI@2  
+  displayName: 'DotNet Restore NuGet packages'  
+  inputs:  
+    command: 'restore'  
+    feedsToUse: 'select'  
+    vstsFeed: 'myFeed'  
+    includeNuGetOrg: true  
+
+- script: dotnet build --configuration $(buildConfiguration)  
+  displayName: 'dotnet build $(buildConfiguration)'  
+
+- task: DotNetCoreCLI@2  
+  displayName: 'Publish API'  
+  inputs:  
+    command: 'publish'  
+    configuration: $(buildConfiguration)  
+    projects: $(project)  
+    arguments: '-o $(System.DefaultWorkingDirectory)/webapi.zip'  
+
+
+# - task: AzureWebApp@1  
+#   displayName: 'Deploy API'  
+#   inputs:  
+#     azureSubscription: $(azureSubscription)  
+#     appType: webApp  
+#     appName: $(appName)  
+#     virtualApplication: '/api'  
+#     package: '$(System.DefaultWorkingDirectory)/**/webapi.zip' 
