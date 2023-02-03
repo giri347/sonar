@@ -18,11 +18,11 @@ steps:
 - task: UseDotNet@2
   inputs:
     version: '3.1.x'
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'webapp'
+    publishLocation: 'pipeline'
 - task: DotNetCoreCLI@2
   displayName: Publish
   inputs:
