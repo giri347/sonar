@@ -87,5 +87,8 @@ steps:
     azureSubscription: 'einfo-terraform'
     appType: 'webApp'
     appName: 'einfowebappdev151694'
+    deployToSlotOrASE: true
+    resourceGroupName: 'sa1_test_eic_DevOpslearning'
+    slotName: 'production'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
