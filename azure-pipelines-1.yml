@@ -17,7 +17,12 @@ steps:
 
 - task: UseDotNet@2
   inputs:
-    version: '3.1.x'
+    version: '3.1.0'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 - task: DotNetCoreCLI@2
   displayName: Publish
   inputs:
