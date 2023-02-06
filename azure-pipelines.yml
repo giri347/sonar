@@ -29,15 +29,20 @@ steps:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
-# - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'einfo-terraform'
-#     appType: 'webAppLinux'
-#     WebAppName: 'einfoprowebapp151694'
-#     deployToSlotOrASE: true
-#     ResourceGroupName: 'sa1_test_eic_DevOpslearning'
-#     SlotName: 'production'
-#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'einfo-terraform'
+    appType: 'webAppLinux'
+    WebAppName: 'einfoprowebapp151694'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'sa1_test_eic_DevOpslearning'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
