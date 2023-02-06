@@ -39,10 +39,7 @@ steps:
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'einfo-terraform'
-    appType: 'webAppLinux'
-    WebAppName: 'einfoprowebapp151694'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'sa1_test_eic_DevOpslearning'
-    SlotName: 'production'
+    appType: 'webApp'
+    WebAppName: 'einfowebapppro151694'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
