@@ -81,14 +81,9 @@ steps:
 #     appName: $(appName)  
 #     virtualApplication: '/api'  
 #     package: '$(System.DefaultWorkingDirectory)/**/webapi.zip' 
-
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'einfo-terraform'
-    appType: 'webApp'
-    appName: 'einfowebappdev151694'
-    deployToSlotOrASE: true
-    resourceGroupName: 'sa1_test_eic_DevOpslearning'
-    slotName: 'production'
+    appType: 'webAppLinux'
+    appName: 'linux-webapp-12345dhendsjdwn'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
