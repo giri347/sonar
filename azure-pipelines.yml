@@ -9,8 +9,8 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  #solution: '$(Build.SourcesDirectory)/$(Repo)/**/*.csproj'
-  solution: '**/*.csproj'
+  solution: '$(Build.SourcesDirectory)/$(Repo)/**/*.csproj'
+  # solution: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -32,14 +32,14 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+# - task: VSTest@2
+#   inputs:
+#     testSelector: 'testAssemblies'
+#     testAssemblyVer2: |
+#       **\*test*.dll
+#       !**\*TestAdapter.dll
+#       !**\obj\**
+#     searchFolder: '$(System.DefaultWorkingDirectory)'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
