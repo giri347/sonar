@@ -71,6 +71,11 @@ steps:
     configuration: $(buildConfiguration)  
     projects: $(project)  
     arguments: '-o $(System.DefaultWorkingDirectory)/webapi.zip'  
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '-o $(System.DefaultWorkingDirectory)/webapi.zip'
 
 
 # - task: AzureWebApp@1  
