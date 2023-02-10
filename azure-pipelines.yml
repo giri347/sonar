@@ -9,7 +9,8 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '$(Build.SourcesDirectory)/$(Repo)/**/*.csproj'
+  #solution: '$(Build.SourcesDirectory)/$(Repo)/**/*.csproj'
+  solution: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -30,6 +31,14 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
 
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
