@@ -49,7 +49,7 @@ steps:
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'einfo-terraform'
-    appType: 'webApp'
-    WebAppName: 'einfowebapppro151694'
+    appType: 'webAppLinux'
+    WebAppName: 'linux-webapp-12345dhendsjdwn'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
