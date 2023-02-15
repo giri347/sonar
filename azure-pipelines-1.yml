@@ -8,6 +8,11 @@ trigger:
 
 pool:
   vmImage: windows-latest
+variables:
+  solution: '**/*.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
 
 steps:
 # - task: DotNetCoreCLI@2
