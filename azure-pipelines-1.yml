@@ -92,7 +92,7 @@ steps:
 #     appName: $(appName)  
 #     virtualApplication: '/api'  
 #     package: '$(System.DefaultWorkingDirectory)/**/webapi.zip' 
--
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
