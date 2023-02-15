@@ -4,25 +4,22 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- none
+- master
+
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '$(Build.SourcesDirectory)/$(Repo)/**/*.csproj'
-  # solution: '**/*.csproj'
+  solution: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
-- checkout: self
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
   inputs:
-    command: 'restore'
     restoreSolution: '$(solution)'
-    feedsToUse: 'config'
 
 
 - task: VSBuild@1
@@ -32,24 +29,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# - task: VSTest@2
-#   inputs:
-#     testSelector: 'testAssemblies'
-#     testAssemblyVer2: |
-#       **\*test*.dll
-#       !**\*TestAdapter.dll
-#       !**\obj\**
-#     searchFolder: '$(System.DefaultWorkingDirectory)'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'einfo-terraform'
-    appType: 'webAppLinux'
-    WebAppName: 'einfo-webapplinux151694'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    azureSubscription: 'Visual Studio Enterprise(398203e5-596e-4058-95c9-f5ee030e54d4)'
+    appType: 'webApp'
+    WebAppName: 'test-app7858'
+    packageForLinux: '$(build.artifactStagingDirectory)\WebApp.zip'
 
