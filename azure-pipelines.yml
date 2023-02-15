@@ -50,6 +50,6 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'einfo-terraform'
     appType: 'webAppLinux'
-    WebAppName: 'linux-webapp-12345dhendsjdwn'
+    WebAppName: 'einfo-webapplinux151694'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
