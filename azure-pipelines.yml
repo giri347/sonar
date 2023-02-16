@@ -32,7 +32,7 @@ steps:
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    configuration: '$(buildconfiguration)'
 
 - task: VSTest@2
   inputs:
