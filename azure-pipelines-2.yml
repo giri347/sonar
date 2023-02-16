@@ -41,5 +41,5 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'einfo-terraform'
     appType: 'webAppLinux'
-    WebAppName: 'einfo-webapplinux151694'
+    WebAppName: 'einfowebapp-151694'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
