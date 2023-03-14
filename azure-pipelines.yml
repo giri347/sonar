@@ -1,0 +1,59 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  solution: '**/*.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+
+steps:
+- task: NuGetToolInstaller@1
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'Sonar-connection'
+    organization: 'giri347'
+    scannerMode: 'MSBuild'
+    projectKey: 'giri347_webappdeploy-AzureDevops'
+    projectName: 'webapp_quliitycheck'
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildconfiguration)'
+
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\$(BuildConfiguration)\*test*.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    codeCoverageEnabled: true
+    platform: '$(Buildplatform)'
+    configuration: '$(Buildconfiguration)'
+- task: SonarCloudAnalyze@1
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'sonar'
+    publishLocation: 'pipeline'
+- task: sonarcloud-buildbreaker@2
+  inputs:
+    SonarCloud: 'Sonar-connection'
+    organization: 'giri347'
